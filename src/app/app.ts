@@ -8,5 +8,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
+  email:string='chaimaemouhssine60@gmail.com';
   protected readonly title = signal('MyApp');
 }
