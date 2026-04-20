@@ -1,30 +1,41 @@
-<div class ="p-3">
+<div class="p-3">
   <div class="card-body">
     <table class="table">
-      <thread>
-      <tr>
-        <th>id</th>
-        <th>name</th>
-        <th>Price</th>
-        <tr>Selected</tr>
-      </tr>
-      </thread>
+      <thead>
 
-    </table>
-    <tbody>
-      @for (p of products;track p){
-        <tr>
-          <td>{{p.id}}</td>
-          <td>{{p.name}}</td>
-          <td>{{p.price}}</td>
-          <td>{{p.selected}}</td>
-          <td><button class="btn btn-outline-primary" (click)="select(product)">Select</button></td>
-        </tr>
-      }
+      <tr>
+
+        <th>ID</th><th>Name</th><th>Price</th><th>Selected</th>
+      </tr>
+      </thead>
+      @if (products) {
+
+        <tbody >
+          @for (p of products; track p){
+            <tr>
+              <td>{{p.id}}</td>
+              <td>{{p.name}}</td>
+              <td>{{p.price}}</td>
+              <td>
+                @if (p.selected) {
+                  <i class="bi bi-check-circle"></i>
+                } @else {
+                  <i class="bi bi-circle"></i>
+
+                }
+              </td>
+              <td>
+                <button (click)="handleDelete(p)" class="btn btn-outline-danger">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          }
+
+
         </tbody>
 
+      }
+    </table>
   </div>
-  <h1>Products</h1>
-  <p>Here are our products.</p>
-
 </div>
