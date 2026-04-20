@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForOf } from '@angular/common';
-import { ProductService } from '../services/productService';
+import { NgIf } from "../../../node_modules/@angular/common/types/_common_module-chunk";
+import { Product } from '../services/product';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.html',
-  styleUrls: ['./product.css'],
-  standalone: false,
+  selector: 'app-products',
+  standalone: true,
+  imports: [],
+  templateUrl: './products.html',
+  styleUrl: './products.css',
 })
-export class Product implements OnInit {
-  products : any;
+export class Products implements OnInit{
+  products : Array<any> = [];
 
-  constructor(private productService: ProductService) {
-  }
-
-  ngOnInit() {
-    this.getAllProducts();
+  constructor(private productService: Product) {
 
   }
-  getAllProducts(){
+  ngOnInit(): void {
+    this.getAllProducts();}
+
+  getAllProducts() {
     this.productService.getAllProducts().subscribe({
-      next: resp =>{
+      next: resp => {
         this.products = resp;
       },
       error: err => {
@@ -28,20 +28,18 @@ export class Product implements OnInit {
       }
     });
   }
-  handleDelete(product:any){
-    let v = confirm("etes vous sure de la suppression?")
-    if (v == true){
-      this.productService.deleteProduct(product).subscribe({
-        next: value =>{
+
+  handleDelete(p: any) {
+    let v= confirm("Are you sure ?");
+    if(v==true) {
+      this.productService.deleteProduct(p).subscribe({
+        next: resp => {
           this.getAllProducts();
         },
         error: err => {
           console.log(err);
         }
       });
-      this.getAllProducts();
-
     }
   }
-
 }
